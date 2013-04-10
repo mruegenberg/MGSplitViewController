@@ -504,7 +504,6 @@
 	[self.detailViewController viewWillAppear:animated];
 	
 	_reconfigurePopup = YES;
-	[self layoutSubviews];
 }
 
 
@@ -516,6 +515,7 @@
 		[self.masterViewController viewDidAppear:animated];
 	}
 	[self.detailViewController viewDidAppear:animated];
+    [self layoutSubviews];
 }
 
 
