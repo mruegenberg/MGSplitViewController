@@ -230,6 +230,9 @@
 	// Little bit ugly looking, but it'll still work even if they change the status bar height in future.
 	float statusBarHeight = MAX((fullScreenRect.size.width - appFrame.size.width), (fullScreenRect.size.height - appFrame.size.height));
 	
+    // Do the same with the tabbar
+    float tabBarHeight = self.tabBarController.tabBar.bounds.size.height;
+    
 	// Initially assume portrait orientation.
 	float width = fullScreenRect.size.width;
 	float height = fullScreenRect.size.height;
@@ -242,7 +245,9 @@
 	
 	// Account for status bar, which always subtracts from the height (since it's always at the top of the screen).
 	height -= statusBarHeight;
-	
+    // Accout for tabbar
+	height -= tabBarHeight;
+    
 	return CGSizeMake(width, height);
 }
 
