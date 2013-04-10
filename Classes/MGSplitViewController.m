@@ -997,6 +997,7 @@
 		if ([_viewControllers objectAtIndex:1] == detail) {
 			changed = NO;
 		} else {
+            [self.detailViewController.view removeFromSuperview];
 			[_viewControllers replaceObjectAtIndex:1 withObject:detail];
 		}
 		
