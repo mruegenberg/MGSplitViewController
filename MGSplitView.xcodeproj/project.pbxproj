@@ -239,6 +239,7 @@
 				GCC_PREFIX_HEADER = MGSplitView_Prefix.pch;
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "MGSplitView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = MGSplitView;
 				SDKROOT = iphoneos;
 			};
@@ -254,6 +255,7 @@
 				GCC_PREFIX_HEADER = MGSplitView_Prefix.pch;
 				GCC_VERSION = "";
 				INFOPLIST_FILE = "MGSplitView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = MGSplitView;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
