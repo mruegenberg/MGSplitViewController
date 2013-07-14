@@ -301,16 +301,23 @@
 				newFrame.size.width += (_splitPosition + _splitWidth);
 			}
 			
-			newFrame.size.width -= (_splitPosition + _splitWidth);
-			detailRect = newFrame;
-			
-			newFrame.origin.x += newFrame.size.width;
-			newFrame.size.width = _splitWidth;
-			dividerRect = newFrame;
-			
-			newFrame.origin.x += newFrame.size.width;
-			newFrame.size.width = _splitPosition;
-			masterRect = newFrame;
+            if(_dividerStyle == MGSplitViewDividerStyleTransparent) {
+                detailRect = CGRectMake(0, 0, width - _splitPosition, height);
+                dividerRect = CGRectMake((width - _splitPosition) - _splitWidth / 2 , 0, _splitWidth, height);
+                masterRect = CGRectMake(width - _splitPosition, 0, _splitPosition, height);
+            }
+            else {
+                newFrame.size.width -= (_splitPosition + _splitWidth);
+                detailRect = newFrame;
+                
+                newFrame.origin.x += newFrame.size.width;
+                newFrame.size.width = _splitWidth;
+                dividerRect = newFrame;
+                
+                newFrame.origin.x += newFrame.size.width;
+                newFrame.size.width = _splitPosition;
+                masterRect = newFrame;
+            }
 		}
 		
 		// Position master.
@@ -479,6 +486,8 @@
 		[self.view bringSubviewToFront:leadingCorners];
 		[self.view bringSubviewToFront:trailingCorners];
 	}
+    
+    [self.view bringSubviewToFront:_dividerView];
 }
 
 
@@ -1074,9 +1083,9 @@
 		_splitWidth = MG_DEFAULT_SPLIT_WIDTH;
 		self.allowsDraggingDivider = NO;
 		
-	} else if (_dividerStyle == MGSplitViewDividerStylePaneSplitter) {
-		cornerRadius = MG_PANESPLITTER_CORNER_RADIUS;
-		_splitWidth = MG_PANESPLITTER_SPLIT_WIDTH;
+	} else if (_dividerStyle == MGSplitViewDividerStylePaneSplitter || _dividerStyle == MGSplitViewDividerStyleTransparent) {
+		cornerRadius = 0;
+		_splitWidth = MG_DEFAULT_SPLIT_WIDTH;
 		self.allowsDraggingDivider = YES;
 	} else {
         NSAssert(TRUE, @"Invalid MGSplitViewDividerStyle");
@@ -1089,6 +1098,11 @@
 			corner.cornerRadius = cornerRadius;
 		}
 	}
+    
+    if(_dividerStyle == MGSplitViewDividerStyleTransparent) {
+        _dividerView.backgroundColor = [UIColor clearColor];
+        _dividerView.opaque = NO;
+    }
 	
 	// Layout all views.
 	[self layoutSubviews];
