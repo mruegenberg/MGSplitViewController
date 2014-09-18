@@ -220,6 +220,17 @@
 }
 
 
+NSInteger majorOSVersion() {
+    static NSInteger osVersion = -1;
+    if(osVersion < 0) {
+        NSString *v = [[UIDevice currentDevice] systemVersion];
+        NSArray *c = [v componentsSeparatedByString:@"."];
+        if([c count] > 0) osVersion = [[c objectAtIndex:0] integerValue];
+    }
+    return osVersion;
+}
+
+
 - (CGSize)splitViewSizeForOrientation:(UIInterfaceOrientation)theOrientation
 {
 	UIScreen *screen = [UIScreen mainScreen];
@@ -238,7 +249,7 @@
 	float height = fullScreenRect.size.height;
 	
 	// Correct for orientation.
-	if (UIInterfaceOrientationIsLandscape(theOrientation)) {
+	if (majorOSVersion() < 8 && UIInterfaceOrientationIsLandscape(theOrientation)) {
 		width = height;
 		height = fullScreenRect.size.width;
 	}
